@@ -8,9 +8,8 @@ use Illuminate\Http\Request;
 
 class PlayerController extends Controller
 {
-    public function show(Player $player)
+    public function show(Player $player, Team $team)
     {
-        $team = Player::with('team_id');
         return view('players.show', compact('player', 'team'));
     }
 }
