@@ -21,9 +21,13 @@
             </form>
           </li>
         @else
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Sign in</a>
+        </li>
           <li class="nav-item">
             <a class="nav-link" href="/register">Sign up</a>
           </li>
+          
         @endauth
       </ul>
     </div>

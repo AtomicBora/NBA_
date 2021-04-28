@@ -30,8 +30,21 @@ class AuthController extends Controller
         return redirect('/login');
     }
 
-    public function login()
+    public function getLoginForm()
     {
-        
+        return view('users.login');
+    }
+
+    public function login(Request $request)
+    {
+    
+          $credentials = [
+            'email' => $request->input('email'),
+            'password' => $request->input('password')
+          ];
+          if (auth()->attempt($credentials)) {
+            return redirect('/');
+          }
+          return view('users.login', ['invalid_credentials' => true]);
     }
 }

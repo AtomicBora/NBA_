@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
@@ -15,15 +16,16 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::group([ 'middleware' => 'auth' ], function () {
 Route::get('/', [TeamController::class, 'index']);
 Route::get('/teams/{team}', [TeamController::class, 'show'])->name('TeamAndPlayers');
-
 Route::get('/players/{player}', [PlayerController::class, 'show'])->name('PlayerInfo');
-
+Route::post('/logout', [AuthController::class, 'logout']);
+Route::post('/teams/{team}/comments', [CommentController::class, 'store']);
+});
+Route::group(['middleware' => 'guest'], function () {
 Route::get('/register', [AuthController::class, 'getRegisterForm']);
 Route::post('/register', [AuthController::class, 'register']);
-
-Route::get('/login', []);
-Route::post('/login', []);
-Route::post('/logout', []);
+Route::get('/login', [AuthController::class, 'getLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+});
