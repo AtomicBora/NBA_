@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    @include('layouts.navbar')
     <div class="container">
     @yield('content')
     </div>

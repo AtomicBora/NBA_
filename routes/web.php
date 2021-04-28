@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
@@ -19,3 +20,10 @@ Route::get('/', [TeamController::class, 'index']);
 Route::get('/teams/{team}', [TeamController::class, 'show'])->name('TeamAndPlayers');
 
 Route::get('/players/{player}', [PlayerController::class, 'show'])->name('PlayerInfo');
+
+Route::get('/register', [AuthController::class, 'getRegisterForm']);
+Route::post('/register', [AuthController::class, 'register']);
+
+Route::get('/login', []);
+Route::post('/login', []);
+Route::post('/logout', []);
